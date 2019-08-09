@@ -2,7 +2,12 @@
 
 Conv-Oracle is an example on how to handle oracles within Hyperledger Fabric with Convector.
 
-First meet [Hyperledger Fabric pre-requisites](https://docs.worldsibu.com/convector#prerequisites).
+## Pre requisites
+
+* First meet [Hyperledger Fabric pre-requisites](https://docs.worldsibu.com/convector#prerequisites).
+* Configure a mock API in [https://www.mockable.io](https://www.mockable.io).
+  * Make sure it is of type `POST` and the path is `bankapi`. 
+  * Copy the whole url in the field `path` of mockable.io and add it in a `.env` file in `./packages/conv-oracle/src/.env` with the content `EXTERNAL_URL=<full-url>`.
 
 ## Start the project
 
@@ -18,6 +23,15 @@ npm run cc:start
 # Start the oracle daemon [ignore npx if you don't use it]
 npx lerna run start --scope conv-oracle --stream
 ```
+
+### See it in action!
+
+```bash
+# If you don't have hurley go and get it! npm i -g @worldsibu/hurley
+hurl invoke carinsurance carinsurance_create "1" "volk" "1199"
+```
+
+This will trigger the transaction in the blockchain - send an event to the oracle daemon - fetch the API - call the `__callback()` and finish the transaction with external data.
 
 ### Want to see the logs of everything happening?
 
