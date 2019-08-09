@@ -20,5 +20,5 @@ export class Carinsurance extends ConvectorModel<Carinsurance> {
   public insuranceLevel: number;
 
   @Validate(yup.string())
-  public oracleRespondeCode: string;
+  public oracleResponseCode: string;
 }

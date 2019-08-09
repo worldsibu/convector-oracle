@@ -27,9 +27,9 @@ export class CarinsuranceController extends ConvectorController<ChaincodeTx> {
 
     const carinsurance = new Carinsurance(id);
     carinsurance.name = name;
-    carinsurance.oracleRespondeCode = oracleRespondeCode;
+    carinsurance.oracleResponseCode = oracleResponseCode;
     console.log('Pending to set [insuranceLevel] until oracle queries API');
-    
+
     await carinsurance.save();
   }
 
@@ -52,7 +52,7 @@ export class CarinsuranceController extends ConvectorController<ChaincodeTx> {
     const model = new Carinsurance(valueResponse[0]);
     model.insuranceLevel = response;
     // clean oracleRespondeCode to avoid exploit twice
-    model.oracleRespondeCode = '';
+    model.oracleResponseCode = '';
     await model.save();
     console.log('[insuranceLevel] set after oracle response');
   }
