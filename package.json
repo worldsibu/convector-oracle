@@ -13,12 +13,10 @@
     "env:clean": "hurl clean",
     "cc:start": "f() { npm run cc:package; npm run cc:install carinsurance; }; f",
     "cc:upgrade": "f() { npm run cc:package; hurl upgrade carinsurance node $1  -P ./chaincode-carinsurance; }; f",
-    "cc:start:oracle": "f() { npm run cc:package; npm run cc:install convoracle; }; f",
-    "cc:upgrade:oracle": "f() { npm run cc:package; hurl upgrade convoracle node $1  -P ./chaincode-convoracle; }; f",
     "===================INTERNALS===================": "===================NO NEED TO CALL THEM DIRECTLY===================",
     "lerna:install": "lerna bootstrap",
     "lerna:build": "lerna run build",
-    "cc:package": "f() { npm run lerna:build; chaincode-manager --update --config ./carinsurance.config.json --output ./chaincode-carinsurance package; chaincode-manager --update --config ./convoracle.config.json --output ./chaincode-convoracle package; }; f",
+    "cc:package": "f() { npm run lerna:build; chaincode-manager --update --config ./config.json --output ./chaincode-carinsurance package; }; f",
     "cc:install": "f() { hurl install $1 node -P ./chaincode-$1; }; f",
     "cc:install:debug": "f() { hurl install $1 node -P ./chaincode-$1 --debug; }; f",
     "lerna:test": "lerna exec npm run test"

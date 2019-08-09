@@ -30,6 +30,7 @@ export class CarinsuranceController extends ConvectorController<ChaincodeTx> {
     carinsurance.oracleResponseCode = oracleResponseCode;
     console.log('Pending to set [insuranceLevel] until oracle queries API');
 
+    carinsurance.dateStartRequest = this.tx.stub.getTxDate().getTime();
     await carinsurance.save();
   }
 
@@ -43,16 +44,25 @@ export class CarinsuranceController extends ConvectorController<ChaincodeTx> {
     if (!oracleRespondeCode) {
       throw new Error('missing [oracleRespondeCode]');
     }
-    console.log('Callback sent');
+
+    console.log('Callback received');
+
     const valueResponse = await Carinsurance.query(Carinsurance, {
       'selector': {
-        'oracleRespondeCode': oracleRespondeCode
+        'oracleResponseCode': oracleRespondeCode
       }
     });
+
+    if (!valueResponse || !valueResponse[0] || !valueResponse[0].id) {
+      throw new Error('No registry can be updated');
+    }
+
     const model = new Carinsurance(valueResponse[0]);
     model.insuranceLevel = response;
     // clean oracleRespondeCode to avoid exploit twice
     model.oracleResponseCode = '';
+
+    model.dateOracleResponse = this.tx.stub.getTxDate().getTime();
     await model.save();
     console.log('[insuranceLevel] set after oracle response');
   }

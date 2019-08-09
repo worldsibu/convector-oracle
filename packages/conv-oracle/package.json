@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:dev": "nodemon",
+    "start:debug": "nodemon --config nodemon-debug.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "author": "",
   "license": "ISC",
@@ -26,7 +35,8 @@
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
     "uuid": "^3.3.2",
-    "carinsurance-cc": "0.1.0"
+    "carinsurance-cc": "0.1.0",
+    "request-promise": "4.2.4"
   },
   "devDependencies": {
     "@nestjs/passport": "^6.0.0",
