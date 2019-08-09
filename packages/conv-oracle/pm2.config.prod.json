@@ -1,0 +1,11 @@
+{
+  "apps" : [
+    {
+      "name": "taste-of-trust-server",
+      "script": "src/main.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
