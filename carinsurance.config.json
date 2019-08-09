@@ -1,0 +1,10 @@
+{
+  "skipInit": true,
+  "controllers": [
+    {
+      "name": "carinsurance-cc",
+      "version": "file:./packages/carinsurance-cc",
+      "controller": "CarinsuranceController"
+    }
+  ]
+}
